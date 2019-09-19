@@ -48,7 +48,7 @@ int main(void)
 	client.push_back(new user(temp_sock, temp_addr));
 
 	cout << "Client Connect" << endl;
-	cout << "Client Connect" << endl;
+	cout << "ip : " << client[0]->getuserip() << " " << "port : " << client[0]->getuserport() << endl;
 
 	closesocket(temp_sock);
 	closesocket(server_sock);
