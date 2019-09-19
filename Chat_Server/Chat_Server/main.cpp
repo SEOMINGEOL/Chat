@@ -48,6 +48,7 @@ int main(void)
 	client.push_back(new user(temp_sock, temp_addr));
 
 	cout << "Client Connect" << endl;
+	cout << "Client Connect" << endl;
 
 	closesocket(temp_sock);
 	closesocket(server_sock);
