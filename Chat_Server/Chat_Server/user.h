@@ -2,6 +2,7 @@
 #pragma comment(lib, "ws2_32.lib")
 #include <string>
 #include <WinSock2.h>
+#include "Log.h"
 
 using namespace std;
 
@@ -20,11 +21,12 @@ public:
 	string GetUserIp();
 	int GetUserPort();
 	void SetUser_Name(string user_name);
-	void Work();
 	void Read_Data(char* buf);
 	void Send_Data(char* buf);
 	void Broken_Connect(User* user);
+	void Work();
 	void CloseSocket();
 	string GetUser_Name();
+	Log log;
 };
 

@@ -30,10 +30,11 @@ void Log::PrintNewUser(User* user)
 {
 	Print_Time();
 	cout << user->GetUser_Name() << "(" << user->GetUserIp() << ", " << user->GetUserPort() << ")" << "가(이) 접속했습니다. 환영해주세요!" << endl;
-}*/
-/*
+}
+
 void Log::PrintOutUser(User* user)
 {
 	Print_Time();
 	cout << user->GetUser_Name() << "(" << user->GetUserIp() << ", " << user->GetUserPort() << ")" << "가(이) 종료했습니다. 잘가요!" << endl;
-}*/
+}
+*/

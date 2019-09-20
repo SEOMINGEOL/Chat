@@ -1,6 +1,7 @@
 #pragma once
 #include <WinSock2.h>
 #include "user.h"
+#include "Log.h"
 
 class ChatSocket
 {
@@ -14,5 +15,6 @@ public:
 	void Bind();
 	void Listen();
 	User* Accept();
+	Log log;
 };
 

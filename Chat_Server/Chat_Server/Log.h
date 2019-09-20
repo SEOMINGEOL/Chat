@@ -2,7 +2,6 @@
 #include <iostream>
 #include <string>
 #include <ctime>
-#include "user.h"
 
 using namespace std;
 class Log
@@ -15,9 +14,6 @@ public:
 	~Log();
 
 	void PrintLog(string log);
-	void PrintNewUser(User* user);
 	void Print_Time();
-	//void PrintOutUser(User* user);
-
 };
 

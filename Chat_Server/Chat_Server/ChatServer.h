@@ -3,6 +3,7 @@
 #include <vector>
 #include "ChatSocket.h"
 #include "user.h"
+#include "Log.h"
 
 
 using namespace std;
@@ -17,5 +18,6 @@ public:
 
 	void Start();
 	vector<User*> users;
+	Log log;
 };
 
