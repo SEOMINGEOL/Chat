@@ -5,21 +5,21 @@
 
 using namespace std;
 
-class user
+class User
 {
 private:
 	SOCKET client_sock;
 	SOCKADDR_IN client_address;
 	string user_name;
 public:
-	user();
-	~user();
-	user(SOCKET client_sock, SOCKADDR_IN client_addr);
-	SOCKET getSocket();
-	SOCKADDR_IN getSocket_addr();
-	string getuserip();
-	int getuserport();
-	void setUser_name(string user_name);
-	string getuser_name();
+	User();
+	~User();
+	User(SOCKET client_sock, SOCKADDR_IN client_addr);
+	SOCKET GetSocket();
+	SOCKADDR_IN GetSocket_Addr();
+	string GetUserIp();
+	int GetUserPort();
+	void SetUser_Name(string user_name);
+	string GetUser_Name();
 };
 

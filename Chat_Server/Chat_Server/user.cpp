@@ -2,46 +2,46 @@
 
 using namespace std;
 
-user::user()
+User::User()
 {
 }
 
-user::user(SOCKET client_sock, SOCKADDR_IN client_addr)
+User::User(SOCKET client_sock, SOCKADDR_IN client_addr)
 {
 	this->client_sock = client_sock;
 	this->client_address = client_addr;
 }
 
-string user::getuser_name()
+string User::GetUser_Name()
 {
 	return user_name;
 }
 
-SOCKET user::getSocket()
+SOCKET User::GetSocket()
 {
 	return this->client_sock;
 }
 
-SOCKADDR_IN user::getSocket_addr()
+SOCKADDR_IN User::GetSocket_Addr()
 {
 	return this->client_address;
 }
 
-void user::setUser_name(string name)
+void User::SetUser_Name(string name)
 {
 	this->user_name = name;
 }
 
-string user::getuserip()
+string User::GetUserIp()
 {
 	return inet_ntoa(this->client_address.sin_addr);
 }
 
-int user::getuserport()
+int User::GetUserPort()
 {
 	return client_address.sin_port;
 }
 
-user::~user()
+User::~User()
 {
 }

@@ -12,7 +12,7 @@ int main(void)
 	SOCKET server_sock, temp_sock;
 	SOCKADDR_IN server_addr = { 0 }, temp_addr = { 0 };
 	WSADATA wsaData;
-	vector<user*> client;
+	vector<User*> users;
 	int len;
 
 	WSAStartup(MAKEWORD(2, 2), &wsaData);
@@ -45,10 +45,10 @@ int main(void)
 	{
 		cout << "accept Error" << endl;
 	}
-	client.push_back(new user(temp_sock, temp_addr));
+	users.push_back(new User(temp_sock, temp_addr));
 
 	cout << "Client Connect" << endl;
-	cout << "ip : " << client[0]->getuserip() << " " << "port : " << client[0]->getuserport() << endl;
+	cout << "ip : " << users[0]->GetUserIp() << " " << "port : " << users[0]->GetUserPort() << endl;
 
 	closesocket(temp_sock);
 	closesocket(server_sock);
