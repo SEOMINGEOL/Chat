@@ -147,11 +147,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ChatRoom.cpp" />
+    <ClCompile Include="ChatServer.cpp" />
+    <ClCompile Include="ChatSocket.cpp" />
+    <ClCompile Include="Log.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="user.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChatRoom.h" />
+    <ClInclude Include="ChatServer.h" />
+    <ClInclude Include="ChatSocket.h" />
+    <ClInclude Include="Log.h" />
     <ClInclude Include="user.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

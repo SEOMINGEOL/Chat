@@ -7,9 +7,10 @@ using namespace std;
 class ChatRoom
 {
 private:
-	vector<User> users;
+	
 public:
 	ChatRoom();
 	~ChatRoom();
+	vector<User*> users;
 };
 

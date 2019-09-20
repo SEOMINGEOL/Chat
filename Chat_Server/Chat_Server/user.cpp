@@ -1,4 +1,4 @@
-#include "user.h"
+#include "ChatServer.h"
 
 using namespace std;
 
@@ -6,10 +6,11 @@ User::User()
 {
 }
 
-User::User(SOCKET client_sock, SOCKADDR_IN client_addr)
+User::User(SOCKET user_sock, SOCKADDR_IN user_addr)
 {
-	this->client_sock = client_sock;
-	this->client_address = client_addr;
+	this->user_sock = user_sock;
+	this->user_address = user_addr;
+	this->user_name = "Empty";
 }
 
 string User::GetUser_Name()
@@ -19,12 +20,12 @@ string User::GetUser_Name()
 
 SOCKET User::GetSocket()
 {
-	return this->client_sock;
+	return this->user_sock;
 }
 
 SOCKADDR_IN User::GetSocket_Addr()
 {
-	return this->client_address;
+	return this->user_address;
 }
 
 void User::SetUser_Name(string name)
@@ -34,14 +35,72 @@ void User::SetUser_Name(string name)
 
 string User::GetUserIp()
 {
-	return inet_ntoa(this->client_address.sin_addr);
+	return inet_ntoa(this->user_address.sin_addr);
 }
+
 
 int User::GetUserPort()
 {
-	return client_address.sin_port;
+	return user_address.sin_port;
 }
 
+void User::CloseSocket()
+{
+	closesocket(this->user_sock);
+}
+/*
+void User::Work()
+{
+	char buf[255];
+
+	while (true)
+	{
+		Read_Data(buf);
+		//log.PrintLog(buf);
+	}
+}
+*/
+/*
+void User::Broken_Connect(User* user)
+{
+	//log.PrintOutUser(user);
+	int length = ChatServer::users.size();
+	for (int i = 0; i < length ; i++)
+	{
+		if (user->GetSocket() == ChatServer::users[i]->GetSocket())
+		{
+			ChatServer::users.erase(ChatServer::users.begin() + i);
+			break;
+		}
+	}
+
+	delete this;
+	return;
+}
+*/
+/*
+void User::Read_Data(char* buf)
+{
+	char read_buf[255];
+	int length = 0;
+	memset(&read_buf, 0, sizeof(read_buf));
+
+	if (recv(this->user_sock, (char*)&read_buf, sizeof(read_buf), 0) <= 0)
+	{
+		Broken_Connect(this);
+	}
+
+	length = strnlen(read_buf, 255);
+	strncpy(buf, read_buf, strnlen(read_buf, 255));
+	buf[length] = 0;
+}
+
+void User::Send_Data(char* buf)
+{
+	
+}
+*/
 User::~User()
 {
+	CloseSocket();
 }
