@@ -66,7 +66,7 @@ void User::CloseSocket()
 }
 
 
-void User::Work(atomic<bool>* flag)
+void User::Work()
 {
 	char buf[255];
 	string buf_str;
@@ -104,7 +104,6 @@ void User::Work(atomic<bool>* flag)
 	cout << " " << len << endl;
 	len = ChatServer::users.size();
 	cout << " " << len << endl;
-	*flag = true;
 
 	delete this;
 }

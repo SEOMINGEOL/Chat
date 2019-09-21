@@ -15,6 +15,15 @@ ChatServer::~ChatServer()
 {
 }
 
+void ThreadWorkFunc(User* user)
+{
+	//ChatServer::mutex_thread.lock();
+	user->Work();
+	delete user;
+	//ChatServer::works.push_back(thread([&]() {user->Work(); }));
+	//ChatServer::mutex_thread.unlock();
+}
+
 void ChatServer::Start()
 {
 	chat_server.Bind();
@@ -30,11 +39,7 @@ void ChatServer::Start()
 		ChatServer::users.push_back(user);
 		mutex_users.unlock();
 		log.PrintNewUser(user);
-
-		mutex_thread.lock();		
-		ChatServer::works.push_back(thread([&]() {user->Work(&done); }));
-		mutex_thread.unlock();
-
+		ChatServer::works.push_back(thread([&]() {ChatServer::ThreadWorkFunc(user); }));
 
 		
 		if (done)
@@ -44,8 +49,6 @@ void ChatServer::Start()
 		}
 		
 	}
-
-
 }
 
 

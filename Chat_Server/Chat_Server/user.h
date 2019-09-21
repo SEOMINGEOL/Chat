@@ -33,7 +33,8 @@ public:
 	void SetUser_Name(string user_name);
 	void Read_Data(char* buf);
 	void Send_Data(char* buf);
-	void Work(atomic<bool>* flag);
+	//void Work(atomic<bool>* flag);
+	void Work();
 	void CloseSocket();
 	string GetUser_Name();
 

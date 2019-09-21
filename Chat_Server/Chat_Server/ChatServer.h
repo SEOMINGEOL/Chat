@@ -30,6 +30,7 @@ public:
 	ChatServer();
 	~ChatServer();
 
+	void ThreadWorkFunc(User* user);
 	void Start();
 	static vector<User*> users;
 	static vector<thread> works;
@@ -37,6 +38,7 @@ public:
 	static mutex mutex_thread;
 	Log log;
 	static atomic<bool> done;
+	
 };
 
 #endif // !CHATSERVER_CLASS
