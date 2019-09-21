@@ -104,8 +104,6 @@ void User::Work()
 	cout << " " << len << endl;
 	len = ChatServer::users.size();
 	cout << " " << len << endl;
-
-	delete this;
 }
 
 void User::Send_Data(char* buf)
