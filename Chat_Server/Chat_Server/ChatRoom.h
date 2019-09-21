@@ -7,6 +7,7 @@
 #include <vector>
 #include "user.h"
 
+
 using namespace std;
 
 class ChatRoom
@@ -17,6 +18,7 @@ public:
 	ChatRoom();
 	~ChatRoom();
 	vector<User*> users;
+
 };
 
 #endif // !CHATROOM_CLASS

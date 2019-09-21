@@ -7,11 +7,14 @@
 #include <iostream>
 #include <string>
 #include <WinSock2.h>
+#include <atomic>
+#include <chrono>
 #include "Log.h"
 
 using std::cout;
 using std::endl;
 using std::string;
+using std::atomic;
 
 class User : public Log
 {
@@ -30,8 +33,7 @@ public:
 	void SetUser_Name(string user_name);
 	void Read_Data(char* buf);
 	void Send_Data(char* buf);
-	void Broken_Connect(User* user);
-	void Work();
+	void Work(atomic<bool>* flag);
 	void CloseSocket();
 	string GetUser_Name();
 

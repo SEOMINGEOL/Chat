@@ -52,8 +52,7 @@ void User::Read_Data(char* buf)
 
 	if (recv(this->user_sock, (char*)&read_buf, sizeof(read_buf), 0) <= 0)
 	{
-		Broken_Connect(this);
-		return;
+		throw 99;
 	}
 
 	length = strnlen(read_buf, 255);
@@ -67,37 +66,46 @@ void User::CloseSocket()
 }
 
 
-void User::Work()
+void User::Work(atomic<bool>* flag)
 {
 	char buf[255];
-
+	string buf_str;
 	while (true)
 	{
-		Read_Data(buf);
-		log.PrintLog(buf);
-	}
-}
-
-void User::Broken_Connect(User* user)
-{
-	log.PrintOutUser(user);
-	ChatServer temp;
-	int length = temp.users.size();
-	for (int i = 0; i < length ; i++)
-	{
-		if (user->GetSocket() == temp.users[i]->GetSocket())
+		try 
 		{
-			temp.users.erase(temp.users.begin() + i);
+			Read_Data(buf);
+			buf_str = buf;
+			if (buf_str.length() > 0)
+				log.PrintLog(buf_str);
+		}
+		catch (int e)
+		{
+			log.PrintOutUser(this);
 			break;
 		}
 	}
+	
+	int length = ChatServer::users.size();
+	
+	ChatServer::mutex_users.lock();
+	for (int i = 0; i < length; i++)
+	{
+		if (this->GetSocket() == ChatServer::users[i]->GetSocket())
+		{
+			ChatServer::users.erase(ChatServer::users.begin() + i);
+			break;
+		}
+	}
+	ChatServer::mutex_users.unlock();
 
-	delete this;
-	return;
+
+	int len = ChatServer::works.size();
+	cout << " " << len << endl;
+	len = ChatServer::users.size();
+	cout << " " << len << endl;
+	*flag = true;
 }
-
-
-
 
 void User::Send_Data(char* buf)
 {
