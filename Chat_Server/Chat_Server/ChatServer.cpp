@@ -15,7 +15,7 @@ ChatServer::~ChatServer()
 {
 }
 
-void ThreadWorkFunc(User* user)
+void ChatServer::ThreadWorkFunc(User* user)
 {
 	//ChatServer::mutex_thread.lock();
 	user->Work();
