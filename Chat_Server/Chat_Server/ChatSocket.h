@@ -6,8 +6,9 @@
 
 #include <WinSock2.h>
 #include "user.h"
+#include "Log.h"
 
-class ChatSocket
+class ChatSocket : public Log
 {
 private:
 	SOCKET server_socket;
@@ -19,6 +20,7 @@ public:
 	void Bind();
 	void Listen();
 	User* Accept();
+	Log log;
 };
 
 #endif // !CHATSOCKET_CLASS

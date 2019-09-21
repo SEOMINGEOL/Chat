@@ -7,12 +7,13 @@
 #include <iostream>
 #include <string>
 #include <WinSock2.h>
+#include "Log.h"
 
 using std::cout;
 using std::endl;
 using std::string;
 
-class User
+class User : public Log
 {
 private:
 	SOCKET user_sock;
@@ -33,6 +34,8 @@ public:
 	void Work();
 	void CloseSocket();
 	string GetUser_Name();
+
+	Log log;
 };
 
 

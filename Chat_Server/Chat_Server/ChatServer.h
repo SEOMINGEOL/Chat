@@ -7,12 +7,13 @@
 #include <vector>
 #include "ChatSocket.h"
 #include "user.h"
+#include "Log.h"
 
 using std::cout;
 using std::endl;
 using std::vector;
 
-class ChatServer
+class ChatServer : public Log
 {
 private:
 	ChatSocket chat_server;
@@ -22,6 +23,7 @@ public:
 
 	void Start();
 	vector<User*> users;
+	Log log;
 };
 
 #endif // !CHATSERVER_CLASS

@@ -1,8 +1,5 @@
 #include "ChatServer.h"
 #include "user.h"
-#include "Log.h"
-
-static Log v_log;
 
 User::User()
 {
@@ -77,13 +74,13 @@ void User::Work()
 	while (true)
 	{
 		Read_Data(buf);
-		v_log.PrintLog(buf);
+		log.PrintLog(buf);
 	}
 }
 
 void User::Broken_Connect(User* user)
 {
-	v_log.PrintOutUser(user);
+	log.PrintOutUser(user);
 	ChatServer temp;
 	int length = temp.users.size();
 	for (int i = 0; i < length ; i++)
