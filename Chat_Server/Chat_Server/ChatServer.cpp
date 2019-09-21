@@ -4,6 +4,7 @@ vector<User*> ChatServer::users = vector<User*>();
 vector<thread> ChatServer::works = vector<thread>();
 mutex ChatServer::mutex_users;
 mutex ChatServer::mutex_thread;
+atomic<bool> ChatServer::done = false;
 
 ChatServer::ChatServer()
 {
@@ -21,8 +22,6 @@ void ChatServer::Start()
 
 	log.PrintLog("Start Server");
 
-	atomic<bool> done = false;
-
 	while (true)
 	{
 		User* user = chat_server.Accept();
@@ -36,11 +35,14 @@ void ChatServer::Start()
 		ChatServer::works.push_back(thread([&]() {user->Work(&done); }));
 		mutex_thread.unlock();
 
+
+		
 		if (done)
 		{
 			cout << "finish" << endl;
 			works[0].join();
 		}
+		
 	}
 
 

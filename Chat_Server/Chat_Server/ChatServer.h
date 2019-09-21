@@ -36,7 +36,7 @@ public:
 	static mutex mutex_users;
 	static mutex mutex_thread;
 	Log log;
-	vector<future<void>> thread_future;
+	static atomic<bool> done;
 };
 
 #endif // !CHATSERVER_CLASS

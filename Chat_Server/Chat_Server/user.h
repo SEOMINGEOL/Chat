@@ -38,6 +38,7 @@ public:
 	string GetUser_Name();
 
 	Log log;
+	bool d_flag;
 };
 
 

@@ -105,6 +105,8 @@ void User::Work(atomic<bool>* flag)
 	len = ChatServer::users.size();
 	cout << " " << len << endl;
 	*flag = true;
+
+	delete this;
 }
 
 void User::Send_Data(char* buf)
@@ -115,5 +117,26 @@ void User::Send_Data(char* buf)
 
 User::~User()
 {
-	CloseSocket();
+	closesocket(this->user_sock);
+	
+	/*
+	if (ChatServer::done)
+	{
+		cout << "over here" << endl;
+		int len = ChatServer::works.size();
+		cout << " " << len << endl;
+		len = ChatServer::users.size();
+		cout << " " << len << endl;
+		ChatServer::mutex_thread.lock();
+		ChatServer::works[0].detach();
+		if (ChatServer::works[0].joinable())
+		{
+			cout << "asdfasdfasdf" << endl;
+			ChatServer::works[0].join();
+		}
+		
+		ChatServer::mutex_thread.unlock();
+		cout << "end here" << endl;
+	}
+	*/
 }
