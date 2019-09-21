@@ -115,23 +115,27 @@ void User::Send_Data(char* buf)
 User::~User()
 {
 	closesocket(this->user_sock);
-	
-	//if (ChatServer::done)
-	//{
-		cout << "over here" << endl;
-		int len = ChatServer::works.size();
-		cout << " " << len << endl;
-		len = ChatServer::users.size();
-		cout << " " << len << endl;
-		ChatServer::mutex_thread.lock();
-		if (ChatServer::works[0].joinable())
+	/*
+	cout << "inside here" << endl;
+	while (true)
+	{
+		cout << "inside here2" << endl;
+		if (ChatServer::done)
 		{
+			cout << "over here" << endl;
+			int len = ChatServer::works.size();
+			cout << " " << len << endl;
+			len = ChatServer::users.size();
+			cout << " " << len << endl;
+			ChatServer::mutex_thread.lock();
 			cout << "asdfasdfasdf" << endl;
 			ChatServer::works[0].join();
+			cout << "asdfasdfasdf" << endl;
+
+			ChatServer::mutex_thread.unlock();
+			cout << "end here" << endl;
+			break;
 		}
-		
-		ChatServer::mutex_thread.unlock();
-		cout << "end here" << endl;
-	//}
-	
+	}
+	*/
 }

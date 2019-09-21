@@ -18,10 +18,16 @@ ChatServer::~ChatServer()
 void ChatServer::ThreadWorkFunc(User* user)
 {
 	//ChatServer::mutex_thread.lock();
+	cout << "124124124" << endl;
 	user->Work();
+	cout << "124124124" << endl;
+	
 	delete user;
 	//ChatServer::works.push_back(thread([&]() {user->Work(); }));
 	//ChatServer::mutex_thread.unlock();
+	
+	cout << "124124124" << endl;
+	done = true;
 }
 
 void ChatServer::Start()
@@ -41,13 +47,14 @@ void ChatServer::Start()
 		log.PrintNewUser(user);
 		ChatServer::works.push_back(thread([&]() {ChatServer::ThreadWorkFunc(user); }));
 
-		/*
+		
 		if (done)
 		{
 			cout << "finish" << endl;
 			works[0].join();
+			cout << "finish end" << endl;
 		}
-		*/
+		
 	}
 }
 
