@@ -118,16 +118,14 @@ User::~User()
 {
 	closesocket(this->user_sock);
 	
-	/*
-	if (ChatServer::done)
-	{
+	//if (ChatServer::done)
+	//{
 		cout << "over here" << endl;
 		int len = ChatServer::works.size();
 		cout << " " << len << endl;
 		len = ChatServer::users.size();
 		cout << " " << len << endl;
 		ChatServer::mutex_thread.lock();
-		ChatServer::works[0].detach();
 		if (ChatServer::works[0].joinable())
 		{
 			cout << "asdfasdfasdf" << endl;
@@ -136,6 +134,6 @@ User::~User()
 		
 		ChatServer::mutex_thread.unlock();
 		cout << "end here" << endl;
-	}
-	*/
+	//}
+	
 }

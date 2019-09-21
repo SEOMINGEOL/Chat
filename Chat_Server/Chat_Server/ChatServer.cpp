@@ -41,13 +41,13 @@ void ChatServer::Start()
 		log.PrintNewUser(user);
 		ChatServer::works.push_back(thread([&]() {ChatServer::ThreadWorkFunc(user); }));
 
-		
+		/*
 		if (done)
 		{
 			cout << "finish" << endl;
 			works[0].join();
 		}
-		
+		*/
 	}
 }
 
