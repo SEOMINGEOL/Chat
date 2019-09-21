@@ -1,9 +1,18 @@
 #pragma once
+
+#ifndef LOG_CLASS
+#define LOG_CLASS
+
 #include <iostream>
 #include <string>
 #include <ctime>
 
-using namespace std;
+class User;
+
+using std::cout;
+using std::endl;
+using std::string;
+
 class Log
 {
 private:
@@ -15,5 +24,9 @@ public:
 
 	void PrintLog(string log);
 	void Print_Time();
+	void PrintNewUser(User* user);
+	void PrintOutUser(User* user);
+	
 };
 
+#endif // !LOG_CLASS

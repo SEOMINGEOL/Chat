@@ -1,12 +1,16 @@
 #pragma once
+
+#ifndef CHATSERVER_CLASS
+#define CHATSERVER_CLASS
+
 #include <iostream>
 #include <vector>
 #include "ChatSocket.h"
 #include "user.h"
-#include "Log.h"
 
-
-using namespace std;
+using std::cout;
+using std::endl;
+using std::vector;
 
 class ChatServer
 {
@@ -18,6 +22,6 @@ public:
 
 	void Start();
 	vector<User*> users;
-	Log log;
 };
 
+#endif // !CHATSERVER_CLASS

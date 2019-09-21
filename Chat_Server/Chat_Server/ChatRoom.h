@@ -1,4 +1,9 @@
 #pragma once
+
+#ifndef CHATROOM_CLASS
+#define CHATROOM_CLASS
+
+
 #include <vector>
 #include "user.h"
 
@@ -14,3 +19,4 @@ public:
 	vector<User*> users;
 };
 
+#endif // !CHATROOM_CLASS

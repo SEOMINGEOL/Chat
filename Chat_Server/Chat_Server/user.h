@@ -1,10 +1,16 @@
 #pragma once
 #pragma comment(lib, "ws2_32.lib")
+
+#ifndef USER_CLASS
+#define USER_CLASS
+
+#include <iostream>
 #include <string>
 #include <WinSock2.h>
-#include "Log.h"
 
-using namespace std;
+using std::cout;
+using std::endl;
+using std::string;
 
 class User
 {
@@ -27,6 +33,8 @@ public:
 	void Work();
 	void CloseSocket();
 	string GetUser_Name();
-	Log log;
 };
 
+
+
+#endif // !USER_CLASS

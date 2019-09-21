@@ -1,7 +1,8 @@
 #include "ChatServer.h"
 #include "user.h"
+#include "Log.h"
 
-using namespace std;
+static Log v_log;
 
 User::User()
 {
@@ -76,14 +77,13 @@ void User::Work()
 	while (true)
 	{
 		Read_Data(buf);
-		log.PrintLog(buf);
+		v_log.PrintLog(buf);
 	}
 }
 
 void User::Broken_Connect(User* user)
 {
-	//log.PrintOutUser(user);
-	cout << user->GetUser_Name() << "(" << user->GetUserIp() << ", " << user->GetUserPort() << ")" << "가(이) 종료했습니다. 잘가요!" << endl;
+	v_log.PrintOutUser(user);
 	ChatServer temp;
 	int length = temp.users.size();
 	for (int i = 0; i < length ; i++)

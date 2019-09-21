@@ -1,5 +1,7 @@
 #include "ChatSocket.h"
+#include "Log.h"
 
+static Log v_log;
 
 ChatSocket::ChatSocket()
 {
@@ -9,7 +11,7 @@ ChatSocket::ChatSocket()
 	this->server_socket = socket(AF_INET, SOCK_STREAM, 0);
 	if (this->server_socket == INVALID_SOCKET)
 	{
-		log.PrintLog("Socket OPEN Failed");
+		v_log.PrintLog("Socket OPEN Failed");
 		WSACleanup();
 	}
 
@@ -30,7 +32,7 @@ void ChatSocket::Bind()
 {
 	if (bind(this->server_socket, (SOCKADDR*)&this->server_addr, sizeof(this->server_addr)) == SOCKET_ERROR)
 	{
-		log.PrintLog("Bind Error");
+		v_log.PrintLog("Bind Error");
 	}
 }
 
@@ -38,7 +40,7 @@ void ChatSocket::Listen()
 {
 	if (listen(this->server_socket, 10) == SOCKET_ERROR)
 	{
-		log.PrintLog("Listen Error");
+		v_log.PrintLog("Listen Error");
 	}
 }
 
