@@ -19,6 +19,7 @@ public:
 
 	void Bind();
 	void Listen();
+
 	User* Accept();
 	Log log;
 };

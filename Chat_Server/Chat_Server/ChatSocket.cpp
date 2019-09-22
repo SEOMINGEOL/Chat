@@ -47,8 +47,7 @@ User* ChatSocket::Accept()
 	SOCKADDR_IN user_addr;
 
 	int length = sizeof(user_addr);
-
 	user_socket = accept(this->server_socket, (SOCKADDR*)&user_addr, &length);
-
+	
 	return new User(user_socket, user_addr);
 }
