@@ -7,9 +7,6 @@
 #include <vector>
 #include <thread>
 #include <mutex>
-#include <chrono>
-#include <future>
-#include <atomic>
 #include "ChatSocket.h"
 #include "user.h"
 #include "Log.h"
@@ -19,8 +16,6 @@ using std::cout;
 using std::endl;
 using std::vector;
 using std::mutex;
-using std::atomic;
-using std::future;
 
 class ChatServer : public Log
 {
@@ -32,12 +27,14 @@ public:
 
 	void ThreadWorkFunc(User* user);
 	void Start();
+	void Read_Data(char* buf, User* user);
+	void Send_Data(const char* buf, SOCKET socket);
+	void SendMessageToUsers(const char* buf);
 	static vector<User*> users;
 	static vector<thread> works;
 	static mutex mutex_users;
 	static mutex mutex_thread;
 	Log log;
-	static atomic<bool> done;
 	
 };
 

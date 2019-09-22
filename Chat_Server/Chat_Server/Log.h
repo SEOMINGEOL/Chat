@@ -6,6 +6,7 @@
 #include <iostream>
 #include <string>
 #include <ctime>
+#include <sstream>
 
 class User;
 
@@ -24,9 +25,10 @@ public:
 
 	void PrintLog(string log);
 	void Print_Time();
+	string GetTime();
 	void PrintNewUser(User* user);
 	void PrintOutUser(User* user);
-	
+	void PrintUserChat(User* user, string log);
 };
 
 #endif // !LOG_CLASS
