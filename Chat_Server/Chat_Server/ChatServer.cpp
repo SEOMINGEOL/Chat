@@ -70,9 +70,19 @@ void ChatServer::ThreadWorkFunc(User* user)
 			buf_str = buf;
 			if (buf_str.length() > 0)
 			{
-				log.PrintUserChat(user, buf_str);
-				string send_buf = log.GetTime() + user->GetUserInfo() + string(buf);
-				SendMessageToUsers(send_buf.c_str());
+				if (buf[0] == '*')
+				{
+					user->SetUser_Name(buf + 1);
+					log.PrintUserChat(user, "닉네임 변경 완료되었습니다.");
+					string send_buf = log.GetTime() + user->GetUserInfo() + "닉네임 변경이 완료되었습니다.";
+					SendMessageToUsers(send_buf.c_str());
+				}
+				else
+				{
+					log.PrintUserChat(user, buf_str.erase(0, 1));
+					string send_buf = log.GetTime() + user->GetUserInfo() + buf_str;
+					SendMessageToUsers(send_buf.c_str());
+				}
 			}
 
 		}
