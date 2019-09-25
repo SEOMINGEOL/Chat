@@ -106,6 +106,8 @@ void ChatServer::ThreadWorkFunc(User* user)
 			break;
 		}
 	}
+
+	delete user;
 }
 
 void ChatServer::Start()
