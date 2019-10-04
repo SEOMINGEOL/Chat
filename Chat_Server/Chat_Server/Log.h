@@ -29,6 +29,7 @@ public:
 	void PrintNewUser(User* user);
 	void PrintOutUser(User* user);
 	void PrintUserChat(User* user, string log);
+	void PrintNowUser();
 };
 
 #endif // !LOG_CLASS

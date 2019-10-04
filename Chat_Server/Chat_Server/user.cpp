@@ -58,5 +58,5 @@ void User::CloseSocket()
 
 User::~User()
 {
-	closesocket(this->user_sock);
+	CloseSocket();
 }

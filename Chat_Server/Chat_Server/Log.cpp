@@ -1,5 +1,6 @@
 #include "Log.h"
 #include "user.h"
+#include "ChatServer.h"
 
 Log::Log()
 {
@@ -95,5 +96,11 @@ void Log::PrintOutUser(User* user)
 {
 	Print_Time();
 	cout << user->GetUser_Name() << "(" << user->GetUserIp() << ", " << user->GetUserPort() << ")" << "가(이) 종료했습니다. 잘가요!" << endl;
+}
+
+void Log::PrintNowUser()
+{
+	Print_Time();
+	cout << "현재 유저 수 : " << ChatServer::users.size() << endl;
 }
 

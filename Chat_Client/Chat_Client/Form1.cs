@@ -64,9 +64,16 @@ namespace Chat_Client
                 byte[] buf = new byte[buf_size];
                 int byte_length = net_stream.Read(buf, 0, buf.Length);
 
+                if (byte_length == 0)
+                {
+                    ShowText("서버에 접속할 수 없습니다. 잠시 후 다시 시도해주세요.");
+                    return;
+                }
+
                 if (buf[0] == '*')
                     label2.Text = Encoding.Default.GetString(buf, 0, byte_length).Replace("*","");
-                ShowText(Encoding.Default.GetString(buf, 0, byte_length));
+                else
+                    ShowText(Encoding.Default.GetString(buf, 0, byte_length));
             }
         }
         

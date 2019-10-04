@@ -59,6 +59,11 @@ void ChatServer::SendMessageToUsers(const char* buf)
 	}
 }
 
+void ChatServer::SendMessageNickNameToUser(User* user, char* nickname)
+{
+	Send_Data(nickname, user->GetSocket());
+}
+
 void ChatServer::Start()
 {
 	chat_server.Bind();
@@ -66,17 +71,21 @@ void ChatServer::Start()
 
 	log.PrintLog("Start Server");
 	
-	ThreadPool pool(5);
+	ThreadPool pool(3);
 
 	while (true)
 	{
 		User* user = chat_server.Accept();
 
+		if (users.size() >= 3) {
+			log.PrintLog("최대 유저 초과");
+			delete user;
+			continue;
+		}
+
 		mutex_users.lock();
 		ChatServer::users.push_back(user);
 		mutex_users.unlock();
-
-		log.PrintNewUser(user);
 
 		pool.AddUser(user);
 	}

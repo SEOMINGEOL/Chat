@@ -29,6 +29,7 @@ public:
 	void Read_Data(char* buf, User* user);
 	void Send_Data(const char* buf, SOCKET socket);
 	void SendMessageToUsers(const char* buf);
+	void SendMessageNickNameToUser(User* user, char* buf);
 	static vector<User*> users;
 	static vector<thread> works;
 	static mutex mutex_users;

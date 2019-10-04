@@ -28,11 +28,15 @@ void ThreadPool::ThreadWorkFunc()
 	while (true)
 	{
 		unique_lock<mutex> lock(users_mutex);
+
 		works_cv.wait(lock, [this]() { return !this->users_queue.empty(); });
 
 		User* user = move(users_queue.front());
 		users_queue.pop();
 		lock.unlock();
+
+		log.PrintNewUser(user);
+		log.PrintNowUser();
 		while (true)
 		{
 			try
@@ -46,6 +50,7 @@ void ThreadPool::ThreadWorkFunc()
 						user->SetUser_Name(buf + 1);
 						log.PrintUserChat(user, "닉네임 변경 완료되었습니다.");
 						string send_buf = log.GetTime() + user->GetUserInfo() + "닉네임 변경이 완료되었습니다.";
+						SendMessageNickNameToUser(user, buf);
 						SendMessageToUsers(send_buf.c_str());
 					}
 					else
@@ -71,7 +76,7 @@ void ThreadPool::ThreadWorkFunc()
 						break;
 					}
 				}
-				log.PrintLog("현재 유저 수 : " + ChatServer::users.size() + 1);
+				log.PrintNowUser();
 				ChatServer::mutex_users.unlock();
 				string send_buf = user->GetUserInfo() + "유저가 나갔습니다.";
 				SendMessageToUsers(send_buf.c_str());
