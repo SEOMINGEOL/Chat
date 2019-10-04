@@ -25,7 +25,6 @@ public:
 	ChatServer();
 	~ChatServer();
 
-	void ThreadWorkFunc(User* user);
 	void Start();
 	void Read_Data(char* buf, User* user);
 	void Send_Data(const char* buf, SOCKET socket);

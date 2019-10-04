@@ -1,4 +1,5 @@
 #include "ChatServer.h"
+#include "ThreadPool.h"
 
 vector<User*> ChatServer::users = vector<User*>();
 vector<thread> ChatServer::works = vector<thread>();
@@ -58,58 +59,6 @@ void ChatServer::SendMessageToUsers(const char* buf)
 	}
 }
 
-void ChatServer::ThreadWorkFunc(User* user)
-{
-	char buf[255];
-	string buf_str;
-	while (true)
-	{
-		try
-		{
-			Read_Data(buf, user);
-			buf_str = buf;
-			if (buf_str.length() > 0)
-			{
-				if (buf[0] == '*')
-				{
-					user->SetUser_Name(buf + 1);
-					log.PrintUserChat(user, "닉네임 변경 완료되었습니다.");
-					string send_buf = log.GetTime() + user->GetUserInfo() + "닉네임 변경이 완료되었습니다.";
-					SendMessageToUsers(send_buf.c_str());
-				}
-				else
-				{
-					log.PrintUserChat(user, buf_str.erase(0, 1));
-					string send_buf = log.GetTime() + user->GetUserInfo() + buf_str;
-					SendMessageToUsers(send_buf.c_str());
-				}
-			}
-
-		}
-		catch (int e)
-		{
-			log.PrintOutUser(user);
-			int length = ChatServer::users.size();
-
-			ChatServer::mutex_users.lock();
-			for (int i = 0; i < length; i++)
-			{
-				if (user->GetSocket() == ChatServer::users[i]->GetSocket())
-				{
-					ChatServer::users.erase(ChatServer::users.begin() + i);
-					break;
-				}
-			}
-			ChatServer::mutex_users.unlock();
-			string send_buf = user->GetUserInfo() + "유저가 나갔습니다.";
-			SendMessageToUsers(send_buf.c_str());
-			break;
-		}
-	}
-
-	delete user;
-}
-
 void ChatServer::Start()
 {
 	chat_server.Bind();
@@ -117,6 +66,8 @@ void ChatServer::Start()
 
 	log.PrintLog("Start Server");
 	
+	ThreadPool pool(5);
+
 	while (true)
 	{
 		User* user = chat_server.Accept();
@@ -127,8 +78,7 @@ void ChatServer::Start()
 
 		log.PrintNewUser(user);
 
-		thread thread_work = (thread([&]() {ChatServer::ThreadWorkFunc(user); }));
-		thread_work.detach();
+		pool.AddUser(user);
 	}
 }
 
